@@ -15,7 +15,7 @@ export default class Services {
   getCharacter = async (id) => {
     const res = await this.requestData(`${this._apiLink}characters/${id}?${this._apiKey}`);
     const charData = res.data.results[0];
-    
+
     return {
       name: charData.name,
       description: charData.description,
