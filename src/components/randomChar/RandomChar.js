@@ -10,35 +10,33 @@ class RandomChar extends Component {
     super(props);
     this.characterData();
   }
-  
+
   state = {
-    name: null,
-    description: null,
-    thumbnail: null,
-    homepage: null,
-    wiki: null
+    char: {}
   }
 
+
+  onCharLoaded = (char) => this.setState({ char })
+
   requestApi = new Request()
-
   characterData = () => {
-    const id = '1009148';
+    this.requestApi.getAllCharacters()
+      .then((res) => {
+        let resArr = [];
+        res.data.results.forEach((result) => resArr.push(result.id));
 
-    this.requestApi.getCharacter(id)
-      .then(res => (
-        this.setState({
-          name: res.data.results[0].name,
-          description: res.data.results[0].description,
-          thumbnail: res.data.results[0].thumbnail.path + '.' + res.data.results[0].thumbnail.extension,
-          homepage: res.data.results[0].urls[0].url,
-          wiki: res.data.results[0].urls[1].url
-        })
-      ));
+        const randElemArr = Math.floor(Math.random() * resArr.length),
+              id = resArr[randElemArr];
+
+        this.requestApi
+          .getCharacter(id)
+          .then(this.onCharLoaded);
+      });
   }
 
 
   render() {
-    const { name, description, thumbnail, homepage, wiki } = this.state;
+    const { char: { name, description, thumbnail, homepage, wiki } } = this.state;
 
     return (
       <div className="randomchar">
