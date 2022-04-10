@@ -36,6 +36,11 @@
 .randomchar__descr {
   font-size: 14px;
   line-height: 18px;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
 .randomchar__btns {
@@ -48,7 +53,7 @@
   padding: 40px 35px;
   background-color: $dark;
   position: relative;
-  
+
   button {
     margin-top: 13px;
   }
