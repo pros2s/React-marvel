@@ -9,16 +9,12 @@ import './helpers/randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
 
 class RandomChar extends Component {
-  constructor(props) {
-    super(props);
-    this.characterData();
-  }
-
   state = {
     char: {},
     loading: true,
     error: false
   }
+  componentDidMount() { this.characterData() }
 
 
   onCharLoaded = (char) => this.setState({ char, loading: false })
@@ -46,11 +42,10 @@ class RandomChar extends Component {
   render() {
     const { char, loading, error } = this.state;
 
-    const noDescMessage = 'Here should be description of personage';
     const content = loading ?
                     <Loading/> : error ?
                                 <Error/> :
-                                <CharBlock char={char} noDescMessage={noDescMessage}/>;
+                                <CharBlock char={char}/>;
 
     return (
       <div className="randomchar">
@@ -67,7 +62,7 @@ class RandomChar extends Component {
           </p>
 
           <button className="button button__main">
-            <div className="inner">try it</div>
+            <div className="inner" onClick={ this.characterData }>try it</div>
           </button>
 
           <img src={ mjolnir } alt="mjolnir" className="randomchar__decoration"/>
