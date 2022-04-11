@@ -8,20 +8,22 @@ export default class Services {
     if (!res.ok) throw new Error(`Could not fetch ${url}; status: ${res.status}`);
 
     return await res.json();
-  }
+  };
 
-  getAllCharacters = () => this.requestData(`${this._apiLink}characters?${this._apiKey}`)
+  getAllCharacters = () => this.requestData(`${this._apiLink}characters?${this._apiKey}`);
 
   getCharacter = async (id) => {
     const res = await this.requestData(`${this._apiLink}characters/${id}?${this._apiKey}`);
     const charData = res.data.results[0];
 
     return {
+      id: charData.id,
       name: charData.name,
       description: charData.description,
       thumbnail: charData.thumbnail.path + '.' + charData.thumbnail.extension,
       homepage: charData.urls[0].url,
-      wiki: charData.urls[1].url
+      wiki: charData.urls[1].url,
+      comics: charData.comics.items
     };
-  }
+  };
 }

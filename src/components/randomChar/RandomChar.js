@@ -13,17 +13,18 @@ class RandomChar extends Component {
     char: {},
     loading: true,
     error: false
-  }
-  componentDidMount() { this.characterData() }
+  };
+  componentDidMount() { this.characterData() };
 
 
-  onCharLoaded = (char) => this.setState({ char, loading: false })
+  onCharLoaded = (char) => this.setState({ char, loading: false });
 
-  onError = () => this.setState({ loading: false, error: true })
+  onError = () => this.setState({ loading: false, error: true });
 
-  requestApi = new Request()
+  requestApi = new Request();
   characterData = () => {
-    this.requestApi.getAllCharacters()
+    this.requestApi
+      .getAllCharacters()
       .then((res) => {
         let resArr = [];
         res.data.results.forEach((result) => resArr.push(result.id));
@@ -31,12 +32,13 @@ class RandomChar extends Component {
         const randElemArr = Math.floor(Math.random() * resArr.length),
               id = resArr[randElemArr];
 
+        this.setState({ loading: true });
         this.requestApi
           .getCharacter(id)
           .then(this.onCharLoaded);
       })
       .catch(this.onError);
-  }
+  };
 
 
   render() {
@@ -45,31 +47,31 @@ class RandomChar extends Component {
     const content = loading ?
                     <Loading/> : error ?
                                 <Error/> :
-                                <CharBlock char={char}/>;
+                                <CharBlock char={ char }/>;
 
     return (
-      <div className="randomchar">
+      <div className='randomchar'>
         { content }
 
-        <div className="randomchar__static">
-          <p className="randomchar__title">
+        <div className='randomchar__static'>
+          <p className='randomchar__title'>
             Random character for today!<br/>
             Do you want to get to know him better?
           </p>
 
-          <p className="randomchar__title">
+          <p className='randomchar__title'>
             Or choose another one
           </p>
 
-          <button className="button button__main">
-            <div className="inner" onClick={ this.characterData }>try it</div>
+          <button className='button button__main' onClick={ this.characterData }>
+            <div className='inner'>try it</div>
           </button>
 
-          <img src={ mjolnir } alt="mjolnir" className="randomchar__decoration"/>
+          <img src={ mjolnir } alt='mjolnir' className='randomchar__decoration'/>
         </div>
       </div>
-    )
-  }
+    );
+  };
 }
 
 export default RandomChar;

@@ -12,15 +12,15 @@ class CharList extends Component {
     charlist: [],
     loading: true,
     error: false
-  }
+  };
 
   requestData = new Request();
   componentDidMount() {
     this.requestData.getAllCharacters()
       .then(this.onCharsLoaded)
       .catch(this.onError);
-  }
-  
+  };
+
 
   shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -29,19 +29,19 @@ class CharList extends Component {
     }
 
     return array;
-  }
+  };
 
   onCharsLoaded = (chars) => {
     let charlist = [];
     const resChars = this.shuffleArray(chars.data.results).slice(0, 9);
     resChars.forEach((res) => charlist.push(res));
 
-    this.setState(({ charlist, loading: false }))
+    this.setState(({ charlist, loading: false }));
   };
 
 
   onError = () => {
-    this.setState(({ loading: false, error: true }))
+    this.setState(({ loading: false, error: true }));
   };
 
 
@@ -53,7 +53,9 @@ class CharList extends Component {
                         'contain' :
                         'cover';
       return (
-        <li className="char__item" key={ item.id }>
+        <li className="char__item"
+            key={ item.id }
+            onClick={() => this.props.onCharSelected(item.id)}>
           <img style={ { objectFit } } src={ item.thumbnail.path + '.' + item.thumbnail.extension } alt={ item.name }/>
           <div className="char__name">{ item.name }</div>
         </li>
@@ -64,7 +66,7 @@ class CharList extends Component {
           <Loading/> : error ?
                       <Error/> :
                       characters;
-  }
+  };
 
   render() {
     return (
@@ -77,8 +79,8 @@ class CharList extends Component {
           <div className="inner">load more</div>
         </button>
       </div>
-    )
-  }
+    );
+  };
 }
 
 export default CharList;
