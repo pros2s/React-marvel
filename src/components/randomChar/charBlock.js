@@ -15,11 +15,11 @@ const CharBlock = ({ char }) => {
         <p className="randomchar__descr">{ description || noDescMessage }</p>
 
         <div className="randomchar__btns">
-          <a href={ homepage } className="button button__main">
+          <a href={ homepage } className="button button__main" target='_blank' rel="noopener noreferrer">
             <div className="inner">homepage</div>
           </a>
 
-          <a href={ wiki } className="button button__secondary">
+          <a href={ wiki } className="button button__secondary" target='_blank' rel="noopener noreferrer">
             <div className="inner">Wiki</div>
           </a>
         </div>

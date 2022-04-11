@@ -1,11 +1,11 @@
 import { Component } from 'react';
 
 import Request from '../../services/services';
-import CharBlock from './helpers/charBlock';
-import Error from './helpers/error';
-import Loading from './helpers/loading';
+import CharBlock from './charBlock';
+import Error from '../helpers/error';
+import Loading from '../helpers/loading';
 
-import './helpers/randomChar.scss';
+import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
 
 class RandomChar extends Component {
@@ -49,7 +49,7 @@ class RandomChar extends Component {
 
     return (
       <div className="randomchar">
-        {content}
+        { content }
 
         <div className="randomchar__static">
           <p className="randomchar__title">
