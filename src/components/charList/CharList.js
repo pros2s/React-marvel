@@ -20,23 +20,13 @@ class CharList extends Component {
       .then(this.onCharsLoaded)
       .catch(this.onError);
   };
-
-
-  shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-
-    return array;
-  };
+  
 
   onCharsLoaded = (chars) => {
-    let charlist = [];
-    const resChars = this.shuffleArray(chars.data.results).slice(0, 9);
-    resChars.forEach((res) => charlist.push(res));
-
-    this.setState(({ charlist, loading: false }));
+    this.setState(({
+      charlist: chars.data.results.slice(0, 9),
+      loading: false
+    }));
   };
 
 
