@@ -71,6 +71,11 @@
   &.button__secondary::before, &.button__secondary::after {
     background-color: $grey;
   }
+
+
+  &:disabled {
+    filter: grayscale(50%);
+  }
 }
 
 .button__long {

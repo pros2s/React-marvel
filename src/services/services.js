@@ -12,7 +12,7 @@ export default class Services {
   };
 
   getAllCharacters = async (offset = this._baseOffset) => {
-    const res = await this.requestData(`${this._apiLink}characters?offset=${offset}&${this._apiKey}`);
+    const res = await this.requestData(`${this._apiLink}characters?limit=9&offset=${offset}&${this._apiKey}`);
     return res.data.results.map(this._transformCharacters);
   };
 
