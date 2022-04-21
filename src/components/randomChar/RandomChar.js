@@ -27,7 +27,7 @@ class RandomChar extends Component {
       .getAllCharacters()
       .then((res) => {
         let resArr = [];
-        res.data.results.forEach((result) => resArr.push(result.id));
+        res.forEach((result) => resArr.push(result.id));
 
         const randElemArr = Math.floor(Math.random() * resArr.length),
               id = resArr[randElemArr];

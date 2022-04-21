@@ -11,21 +11,29 @@ class CharList extends Component {
   state = {
     charlist: [],
     loading: true,
-    error: false
+    error: false,
+    newCharsLoading: false
   };
 
   requestData = new Request();
+
   componentDidMount() {
+    this.onCharsLoading();
     this.requestData.getAllCharacters()
       .then(this.onCharsLoaded)
       .catch(this.onError);
   };
-  
 
-  onCharsLoaded = (chars) => {
+
+  onCharsLoading = () => {
+    this.setState({ newCharsLoading: true})
+  };
+
+  onCharsLoaded = (charlist) => {
     this.setState(({
-      charlist: chars.data.results.slice(0, 9),
-      loading: false
+      charlist,
+      loading: false,
+      newCharsLoading: false
     }));
   };
 
@@ -39,14 +47,14 @@ class CharList extends Component {
     const { charlist, loading, error } = this.state;
 
     const characters = charlist.map((item) => {
-      const objectFit = item.thumbnail.path === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available' ?
+      const objectFit = item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ?
                         'contain' :
                         'cover';
       return (
         <li className="char__item"
             key={ item.id }
             onClick={() => this.props.onCharSelected(item.id)}>
-          <img style={ { objectFit } } src={ item.thumbnail.path + '.' + item.thumbnail.extension } alt={ item.name }/>
+          <img style={ { objectFit } } src={ item.thumbnail } alt={ item.name }/>
           <div className="char__name">{ item.name }</div>
         </li>
       );
