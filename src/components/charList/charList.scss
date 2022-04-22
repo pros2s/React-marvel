@@ -18,11 +18,15 @@
 .char__item {
   width: 200px;
   height: 318px;
+  overflow: hidden;
+
   background-color: $dark;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, .25);
+
   padding: 15px;
+
   cursor: pointer;
-  transition: 0.3s transform;
+  transition: transform 0.3s;
 
   img {
     width: 200px;
