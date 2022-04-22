@@ -2,8 +2,8 @@ import { Component } from 'react';
 
 import Request from '../../services/services';
 import CharBlock from './charBlock';
-import Error from '../helpers/error';
-import Loading from '../helpers/loading';
+import Error from '../../helpers/error';
+import Loading from '../../helpers/loading';
 
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';

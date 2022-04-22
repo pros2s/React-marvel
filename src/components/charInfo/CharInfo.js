@@ -2,8 +2,8 @@ import { Component } from 'react';
 
 import Request from '../../services/services';
 import CharComp from './charComp';
-import Error from '../helpers/error';
-import Loading from '../helpers/loading';
+import Error from '../../helpers/error';
+import Loading from '../../helpers/loading';
 import Skeleton from '../skeleton/Skeleton';
 
 import './charInfo.scss';
