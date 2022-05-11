@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 
 import Request from '../../services/services';
 import CharComp from './charComp';
@@ -8,50 +8,53 @@ import Skeleton from '../skeleton/Skeleton';
 
 import './charInfo.scss';
 
-class CharInfo extends Component {
-  state = {
-    char: null,
-    loading: false,
-    error: false
+const CharInfo = (props) => {
+  const { charId } = props;
+
+  const [ char, setChar ] = useState(null);
+  const [ loading, setLoading ] = useState(false);
+  const [ error, setError ] = useState(false);
+
+
+  useEffect(() => {
+    characterData();
+  }, [ charId ]); // eslint-disable-line
+
+
+  const onCharLoaded = (char) => {
+    setLoading(false);
+    setChar(char);
   };
-  componentDidMount() { this.characterData() }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.charId !== prevProps.charId) this.characterData();
-  }
-
-
-  onCharLoaded = (char) => this.setState({ char, loading: false});
-  onError = () => this.setState({ loading: false, error: true});
-
-
-  requestApi = new Request();
-
-  characterData = () => {
-    if (!this.props.charId) return;
-
-    this.setState({ loading: true });
-    this.requestApi
-      .getCharacter(this.props.charId)
-      .then(this.onCharLoaded)
-      .catch(this.onError);
+  const onError = () => {
+    setLoading(false);
+    setError(true);
   };
 
 
-  render() {
-    const { char, loading, error } = this.state;
+  const requestApi = new Request();
 
-    const content = loading ?
-                    <Loading/> : error ?
-                                <Error/> : char ?
-                                          <CharComp char={ char }/> : <Skeleton/>;
+  const characterData = () => {
+    if (!charId) return;
 
-    return (
-      <div className='char__info'>
-        { content }
-      </div>
-    );
+    setLoading(false);
+    requestApi
+      .getCharacter(charId)
+      .then(onCharLoaded)
+      .catch(onError);
   };
+
+
+  const content = loading ?
+                  <Loading/> : error ?
+                              <Error/> : char ?
+                                        <CharComp char={ char }/> : <Skeleton/>;
+
+  return (
+    <div className='char__info'>
+      { content }
+    </div>
+  );
 }
 
 export default CharInfo;
