@@ -12,7 +12,7 @@ export const useHttp = () => {
 
       if (!response.ok) throw new Error(`Could not fetch ${url}; status: ${response.status}`);
 
-      const data = response.json;
+      const data = response.json();
 
       setLoading(false);
       return data;

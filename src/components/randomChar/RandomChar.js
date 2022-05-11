@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import Request from '../../services/services';
+import useServices from '../../services/services';
 import CharBlock from './charBlock';
 import Error from '../../helpers/error';
 import Loading from '../../helpers/loading';
@@ -10,32 +10,22 @@ import mjolnir from '../../resources/img/mjolnir.png';
 
 const RandomChar = () => {
   const [ char, setChar ] = useState({});
-  const [ loading, setLoading ] = useState(true);
-  const [ error, setError ] = useState(false);
 
   useEffect(() => {
     characterData();
 
-    const timer = setInterval(characterData, 10000);
+    const timer = setInterval(characterData, 100000);
 
     return () => { clearInterval(timer); };
   }, []) ; // eslint-disable-line
 
 
-  const onCharLoaded = (char) => {
-    setLoading(false);
-    setChar(char);
-  }
+  const onCharLoaded = (char) => { setChar(char); }
 
-  const onError = () => {
-    setLoading(false);
-    setError(true);
-  }
 
-  const requestApi = new Request();
+  const { loading, error, getAllCharacters, getCharacter } = useServices();
   const characterData = () => {
-    requestApi
-      .getAllCharacters()
+    getAllCharacters()
       .then((res) => {
         let resArr = [];
         res.forEach((result) => resArr.push(result.id));
@@ -43,12 +33,9 @@ const RandomChar = () => {
         const randElemArr = Math.floor(Math.random() * resArr.length),
               id = resArr[randElemArr];
 
-        setLoading(true);
-        requestApi
-          .getCharacter(id)
+        getCharacter(id)
           .then(onCharLoaded);
-      })
-      .catch(onError);
+      });
   };
 
 

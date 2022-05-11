@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import Request from '../../services/services';
+import useServices from '../../services/services';
 import CharComp from './charComp';
 import Error from '../../helpers/error';
 import Loading from '../../helpers/loading';
@@ -32,7 +32,7 @@ const CharInfo = (props) => {
   };
 
 
-  const requestApi = new Request();
+  const requestApi = useServices();
 
   const characterData = () => {
     if (!charId) return;
