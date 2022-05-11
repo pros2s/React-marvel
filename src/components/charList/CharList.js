@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-import Request from '../../services/services';
+import useServices from '../../services/services';
 import Loading from '../../helpers/loading';
 import Error from '../../helpers/error';
 
@@ -16,7 +16,7 @@ const CharList = (props) => {
   const [ offset, setOffset ] = useState(210);
   const [ error, setError ] = useState(false);
 
-  const requestData = new Request();
+  const requestData = useServices();
 
   useEffect(() => {
     onRequest();
