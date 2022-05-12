@@ -29,7 +29,7 @@ const CharList = (props) => {
   const onCharsLoaded = (newCharlist) => {
     let ended = newCharlist.length < 9 ? true : false;
 
-    setCharList((charlist) => [...charlist, ...newCharlist]);
+    setCharList([...charlist, ...newCharlist]);
     setOffset((offset) => offset + 9);
     setNewCharsLoading(false);
     setCharsEnded(ended);
