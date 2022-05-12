@@ -11,27 +11,19 @@ const CharList = (props) => {
   const [ newCharsLoading, setNewCharsLoading ] = useState(false);
   const [ charsEnded, setCharsEnded ] = useState(false);
   const [ charlist, setCharList ] = useState([]);
-
-  const [ loading, setLoading ] = useState(true);
   const [ offset, setOffset ] = useState(210);
-  const [ error, setError ] = useState(false);
 
-  const requestData = useServices();
+  const { error, loading, getAllCharacters} = useServices();
 
   useEffect(() => {
-    onRequest();
+    onRequest(offset, true);
   }, []); // eslint-disable-line
 
 
-  const onRequest = (offset) => {
-    onCharsLoading();
-    requestData.getAllCharacters(offset)
-      .then(onCharsLoaded)
-      .catch(onError);
-  };
-
-  const onCharsLoading = () => {
-    setNewCharsLoading(true);
+  const onRequest = (offset, initial) => {
+    initial ? setNewCharsLoading(true) : setNewCharsLoading(false);
+    getAllCharacters(offset)
+      .then(onCharsLoaded);
   };
 
   const onCharsLoaded = (newCharlist) => {
@@ -41,13 +33,6 @@ const CharList = (props) => {
     setOffset((offset) => offset + 9);
     setNewCharsLoading(false);
     setCharsEnded(ended);
-    setLoading(false);
-  };
-
-
-  const onError = () => {
-    setLoading(false);
-    setError(true);
   };
 
 
@@ -94,12 +79,11 @@ const CharList = (props) => {
       );
     });
 
-    return loading ?
-          <Loading/> : error ?
-                      <Error/> :
-                      characters;
+    return loading && newCharsLoading ?
+                            <Loading/> : error ?
+                                        <Error/> :
+                                        characters;
   };
-
 
   return (
     <div className="char__list">
