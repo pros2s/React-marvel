@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 import useServices from '../../services/services';
 import Loading from '../../helpers/loading';
@@ -37,60 +38,39 @@ const ComicsList = (props) => {
 
   const refItems = useRef([]);
 
-  const onFocus = (id) => {
-    const refCur = refItems.current;
-
-    refCur.forEach((item) => item.classList.remove('comics__item_selected'));
-    refCur[id].classList.add('comics__item_selected');
-    refCur[id].focus();
-  };
-
-  const focusedAndSelected = (id, i) => {
-    props.onComicsSelected(id);
-    onFocus(i);
-  };
+  const onClick = (id) => refItems.current[id].click();
 
 
   const prepareToRender = () => {
     const comics = comicsList.map((item, i) => {
-      const { id, thumbnail, title, price, url } = item;
+      const { id, thumbnail, title, price } = item;
 
       const objectFit = thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ?
                         'contain' :
                         'cover';
       return (
-        <li
-          className="comics__item"
-          ref={(element) => refItems.current[i] = element}
-          tabIndex={ 0 }
-          key={ i }
-          onClick={ () => {
-              focusedAndSelected(id, i);
-            }
-          }
-          onKeyPress={(e) => {
-              if (e.key === ' ' || e.key === 'Enter') {
-                focusedAndSelected(id, i);
-              };
-            }
-          }>
-          <a href={ url } target='_blank' rel="noopener noreferrer">
-            <img
-              style={ { objectFit } }
-              src={ thumbnail }
-              alt={ title }
-              className="comics__item-img"/>
-            <div className="comics__item-name">{ title }</div>
-            <div className="comics__item-price">{ price }</div>
-          </a>
-        </li>
+        <Link to={`/comics/${id}`}>
+          <li
+            className="comics__item"
+            tabIndex={ 0 }
+            key={ i }
+            ref={(element) => refItems.current[i] = element}
+            onKeyPress={(e) => { if (e.key === ' ' || e.key === 'Enter') onClick(i); } }>
+              <img
+                style={ { objectFit } }
+                src={ thumbnail }
+                alt={ title }
+                className="comics__item-img"/>
+              <div className="comics__item-name">{ title }</div>
+              <div className="comics__item-price">{ price }</div>
+          </li>
+        </Link>
       );
     });
 
     return loading && !newComicsLoading ?
-                            <Loading/> : error ?
-                                        <Error/> :
-                                        comics;
+                              <Loading/> : error ?
+                                           <Error/> : comics;
   };
 
   return (

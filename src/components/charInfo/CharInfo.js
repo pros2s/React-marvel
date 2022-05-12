@@ -35,8 +35,8 @@ const CharInfo = (props) => {
 
   const content = loading ?
                   <Loading/> : error ?
-                              <Error/> : char ?
-                                        <CharComp char={ char }/> : <Skeleton/>;
+                               <Error/> : char ?
+                                          <CharComp char={ char }/> : <Skeleton/>;
 
   return (
     <div className='char__info'>

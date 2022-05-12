@@ -25,7 +25,7 @@ const useServices = () => {
 
   const getComics = async (id) => {
     const res = await request(`${_apiLink}comics/${id}?${_apiKey}`);
-    return _transformCharacters(res.data.results[0]);
+    return _transformComics(res.data.results[0]);
   };
 
 
@@ -49,6 +49,7 @@ const useServices = () => {
       thumbnail: comicsData.thumbnail.path + '.' + comicsData.thumbnail.extension,
       language: comicsData.textObjects.language || 'en-us',
       price: comicsData.prices.price ? `${comicsData.prices.price}$` : 'not available',
+      pageCount: comicsData.pageCount ? `${comicsData.pageCount} pages` : 'No information about the number of pages',
       url: comicsData.urls[0].url
     }
   }

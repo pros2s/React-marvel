@@ -1,4 +1,4 @@
-@import '../../style/variables.scss';
+@import '../../../style/variables.scss';
 
 .single-comic {
   margin-top: 50px;
@@ -11,6 +11,11 @@
 .single-comic__img {
   width: 293px;
   height: 450px;
+}
+
+.single-comic__info {
+  position: relative;
+  height: 100%;
 }
 
 .single-comic__name {
@@ -38,8 +43,21 @@
   font-weight: bold;
   font-size: 18px;
   line-height: 24px;
-  
+
   &:hover {
       color: $main-color;
+  }
+}
+
+.single-comic__descLink {
+  font-size: 35px;
+  font-weight: 700;
+  position: absolute;
+  bottom: 0;
+}
+
+.single-comic__link {
+  &:hover {
+    text-decoration: underline;
   }
 }
