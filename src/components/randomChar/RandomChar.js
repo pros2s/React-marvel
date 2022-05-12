@@ -23,7 +23,7 @@ const RandomChar = () => {
   const onCharLoaded = (char) => { setChar(char); }
 
 
-  const { loading, error, getAllCharacters, getCharacter } = useServices();
+  const { loading, error, getAllCharacters, getCharacter, clearError } = useServices();
   const characterData = () => {
     getAllCharacters()
       .then((res) => {
@@ -33,6 +33,7 @@ const RandomChar = () => {
         const randElemArr = Math.floor(Math.random() * resArr.length),
               id = resArr[randElemArr];
 
+        clearError();
         getCharacter(id)
           .then(onCharLoaded);
       });

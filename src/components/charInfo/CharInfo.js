@@ -22,11 +22,12 @@ const CharInfo = (props) => {
     setChar(char);
   };
 
-  const { error, loading, getCharacter } = useServices();
+  const { error, loading, getCharacter, clearError } = useServices();
 
   const characterData = () => {
     if (!charId) return;
 
+    clearError();
     getCharacter(charId)
       .then(onCharLoaded)
   };

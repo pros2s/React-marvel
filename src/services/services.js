@@ -1,7 +1,7 @@
 import { useHttp } from '../hooks/hook.http';
 
 const useServices = () => {
-  const { loading, error, request } = useHttp();
+  const { loading, error, request, clearError } = useHttp();
 
   const _apiLink = 'https://gateway.marvel.com:443/v1/public/';
   const _apiKey = 'apikey=bc1bc939b59f4d12e5d6c2fcf66f7563';
@@ -18,6 +18,16 @@ const useServices = () => {
     return _transformCharacters(res.data.results[0]);
   };
 
+  const getAllComics = async (offset = 0) => {
+    const res = await request(`${_apiLink}comics?orderBy=issueNumber&limit=8&offset=${offset}&${_apiKey}`);
+    return res.data.results.map(_transformComics);
+  };
+
+  const getComics = async (id) => {
+    const res = await request(`${_apiLink}comics/${id}?${_apiKey}`);
+    return _transformCharacters(res.data.results[0]);
+  };
+
 
   const _transformCharacters = (charData) => {
     return {
@@ -31,7 +41,19 @@ const useServices = () => {
     };
   };
 
-  return { error, loading, getAllCharacters, getCharacter };
+  const _transformComics = (comicsData) => {
+    return {
+      id: comicsData.id,
+      title: comicsData.title,
+      description: comicsData.description || 'There is no description',
+      thumbnail: comicsData.thumbnail.path + '.' + comicsData.thumbnail.extension,
+      language: comicsData.textObjects.language || 'en-us',
+      price: comicsData.prices.price ? `${comicsData.prices.price}$` : 'not available',
+      url: comicsData.urls[0].url
+    }
+  }
+
+  return { error, loading, getAllCharacters, getCharacter, clearError, getAllComics, getComics };
 }
 
 export default useServices;
