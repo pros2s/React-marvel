@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import AppHeader from '../appHeader/AppHeader';
-import AppBanner from '../appBanner/AppBanner';
 import RandomChar from '../randomChar/RandomChar';
 import CharList from '../charList/CharList';
-import ComicsList from '../comicsList/ComicsList';
+// import AppBanner from '../appBanner/AppBanner';
+// import ComicsList from '../comicsList/ComicsList';
 import CharInfo from '../charInfo/CharInfo';
 import ErrorBoundary from '../errorBoundary/ErrorBoundary';
 
@@ -13,18 +13,19 @@ import decoration from '../../resources/img/vision.png';
 const App = () => {
 
   const [ selectedChar, setChar ] = useState(null);
-  const [ selectedComics, setComics ] = useState(null);
+  // const [ selectedComics, setComics ] = useState(null);
 
   const onCharSelected = (id) => setChar(id);
-  const onComicsSelected = (id) => setComics(id);
+  // const onComicsSelected = (id) => setComics(id);
 
   return (
     <div className='app'>
       <AppHeader/>
       <main>
-        {/* <ErrorBoundary>
+        <ErrorBoundary>
           <RandomChar/>
         </ErrorBoundary>
+
         <div className='char__content'>
           <ErrorBoundary>
             <CharList onCharSelected={ onCharSelected }/>
@@ -34,10 +35,9 @@ const App = () => {
             <CharInfo charId={ selectedChar }/>
           </ErrorBoundary>
         </div>
-        <img className='bg-decoration' src={ decoration } alt='vision'/> */
-        }
-        <AppBanner/>
-        <ComicsList onComicsSelected={ onComicsSelected }/>
+        <img className='bg-decoration' src={ decoration } alt='vision'/>
+        {/* <AppBanner/>
+        <ComicsList onComicsSelected={ onComicsSelected }/> */}
       </main>
     </div>
   );
