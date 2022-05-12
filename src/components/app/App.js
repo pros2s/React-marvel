@@ -26,9 +26,9 @@ const App = () => {
             <CharList onCharSelected={onCharSelected}/>
           </ErrorBoundary>
 
-          {/* <ErrorBoundary>
+          <ErrorBoundary>
             <CharInfo charId={selected}/>
-          </ErrorBoundary> */}
+          </ErrorBoundary>
         </div>
         <img className="bg-decoration" src={decoration} alt="vision"/>
       </main>

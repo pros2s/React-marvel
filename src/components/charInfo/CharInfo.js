@@ -12,9 +12,6 @@ const CharInfo = (props) => {
   const { charId } = props;
 
   const [ char, setChar ] = useState(null);
-  const [ loading, setLoading ] = useState(false);
-  const [ error, setError ] = useState(false);
-
 
   useEffect(() => {
     characterData();
@@ -22,26 +19,16 @@ const CharInfo = (props) => {
 
 
   const onCharLoaded = (char) => {
-    setLoading(false);
     setChar(char);
   };
 
-  const onError = () => {
-    setLoading(false);
-    setError(true);
-  };
-
-
-  const requestApi = useServices();
+  const { error, loading, getCharacter } = useServices();
 
   const characterData = () => {
     if (!charId) return;
 
-    setLoading(false);
-    requestApi
-      .getCharacter(charId)
+    getCharacter(charId)
       .then(onCharLoaded)
-      .catch(onError);
   };
 
 
