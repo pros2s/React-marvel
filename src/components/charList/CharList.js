@@ -21,7 +21,7 @@ const CharList = (props) => {
 
 
   const onRequest = (offset, initial) => {
-    initial ? setNewCharsLoading(true) : setNewCharsLoading(false);
+    initial ? setNewCharsLoading(false) : setNewCharsLoading(true);
     getAllCharacters(offset)
       .then(onCharsLoaded);
   };
@@ -79,7 +79,7 @@ const CharList = (props) => {
       );
     });
 
-    return loading && newCharsLoading ?
+    return loading && !newCharsLoading ?
                             <Loading/> : error ?
                                         <Error/> :
                                         characters;

@@ -20,7 +20,7 @@ const ComicsList = (props) => {
 
 
   const onRequest = (offset, initial) => {
-    initial ? setNewComicsLoading(true) : setNewComicsLoading(false);
+    initial ? setNewComicsLoading(false) : setNewComicsLoading(true);
     getAllComics(offset)
       .then(onComicsLoaded);
   };
@@ -54,7 +54,7 @@ const ComicsList = (props) => {
   const prepareToRender = () => {
     const comics = comicsList.map((item, i) => {
       const { id, thumbnail, title, price, url } = item;
-      
+
       const objectFit = thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ?
                         'contain' :
                         'cover';
@@ -87,7 +87,7 @@ const ComicsList = (props) => {
       );
     });
 
-    return loading && newComicsLoading ?
+    return loading && !newComicsLoading ?
                             <Loading/> : error ?
                                         <Error/> :
                                         comics;
