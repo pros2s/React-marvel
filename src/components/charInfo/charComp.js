@@ -11,7 +11,8 @@ const CharComp = ({ char }) => {
       return(
         <li className='char__comics-item' key={i}>
           <a
-            href={ resourceURI }
+            tabIndex={ 0 }
+            href={ resourceURI.match(/\/comics\/[0-9]/g) }
             target='_blank'
             rel='noopener noreferrer'>
               { name }
