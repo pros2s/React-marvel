@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const CharComp = ({ char }) => {
   const { name, description, thumbnail, homepage, wiki, comics } = char;
   const objectFit = thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ?
@@ -9,15 +11,14 @@ const CharComp = ({ char }) => {
       if (i > 9) return;
 
       return(
-        <li className='char__comics-item' key={i}>
-          <a
-            tabIndex={ 0 }
-            href={ resourceURI.match(/\/comics\/[0-9]/g) }
-            target='_blank'
-            rel='noopener noreferrer'>
+        <Link style={ { 'width': '100%' } } to={ `${resourceURI.match(/\/comics\/[0-9]/g)}` }>
+          <li
+            className='char__comics-item'
+            key={ i }
+            tabIndex={ 0 }>
               { name }
-          </a>
-        </li>
+          </li>
+        </Link>
       )
     }
   )
