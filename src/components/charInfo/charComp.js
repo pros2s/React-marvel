@@ -11,13 +11,16 @@ const CharComp = ({ char }) => {
       if (i > 9) return;
 
       return(
-        <Link style={ { 'width': '100%' } } to={ `${resourceURI.match(/\/comics\/[0-9]/g)}` }>
-          <li
-            className='char__comics-item'
-            key={ i }
-            tabIndex={ 0 }>
-              { name }
-          </li>
+        <Link
+          style={{ 'width': '100%' }}
+          to={ `${resourceURI.match(/\/comics\/[0-9]/g)}` }
+          key={i}>
+            <li
+              className='char__comics-item'
+              key={ i }
+              tabIndex={ 0 }>
+                { name }
+            </li>
         </Link>
       )
     }

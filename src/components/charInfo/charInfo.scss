@@ -73,3 +73,27 @@
   line-height: 24px;
   text-align: center;
 }
+
+.char__animate {
+  &-enter {
+    opacity: 0;
+    transform: scale(1.2);
+
+    &-active {
+      opacity: 1;
+      transform: scale(1);
+      transition: all 800ms;
+    }
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: scale(1);
+
+    &-active {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 200ms;
+    }
+  }
+}

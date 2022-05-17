@@ -63,10 +63,7 @@ const CharList = (props) => {
           ref={(element) => refItems.current[i] = element}
           tabIndex={0}
           key={ item.id }
-          onClick={() => {
-              focusedAndSelected(item.id, i);
-            }
-          }
+          onClick={ () => focusedAndSelected(item.id, i) }
           onKeyPress={(e) => {
               if (e.key === ' ' || e.key === 'Enter') {
                 focusedAndSelected(item.id, i);
@@ -81,21 +78,20 @@ const CharList = (props) => {
 
     return loading && !newCharsLoading ?
                             <Loading/> : error ?
-                                        <Error/> :
-                                        characters;
+                                        <Error/> : characters;
   };
 
   return (
     <div className="char__list">
       <ul className="char__grid">
-        { prepareToRender() }
+          { prepareToRender() }
       </ul>
 
       <button
         className="button button__main button__long"
-        style={ { 'display': charsEnded ? 'none' : 'block' }}
+        style={{ 'display': charsEnded ? 'none' : 'block' }}
         disabled={ newCharsLoading }
-        onClick={ () => onRequest(offset) }>
+        onClick={ () =>   onRequest(offset) }>
           <div className="inner">load more</div>
       </button>
     </div>
