@@ -1,5 +1,5 @@
 import Error from '../../helpers/error';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Page404 = () => {
     return (

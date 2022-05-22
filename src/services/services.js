@@ -13,6 +13,11 @@ const useServices = () => {
     return res.data.results.map(_transformCharacters);
   };
 
+  const getCharacterByName = async (name) => {
+    const res = await request(`${_apiLink}characters?name=${name}&${_apiKey}`);
+    return res.data.results.map(_transformCharacters);
+  }
+
   const getCharacter = async (id) => {
     const res = await request(`${_apiLink}characters/${id}?${_apiKey}`);
     return _transformCharacters(res.data.results[0]);
@@ -54,7 +59,7 @@ const useServices = () => {
     }
   }
 
-  return { error, loading, getAllCharacters, getCharacter, clearError, getAllComics, getComics };
+  return { error, loading, getAllCharacters, getCharacterByName, getCharacter, clearError, getAllComics, getComics };
 }
 
 export default useServices;

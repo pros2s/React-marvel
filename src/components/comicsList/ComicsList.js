@@ -49,11 +49,10 @@ const ComicsList = (props) => {
                         'contain' :
                         'cover';
       return (
-        <Link to={`/comics/${id}`}>
+        <Link to={`/comics/${id}`} key={ i }>
           <li
             className="comics__item"
             tabIndex={ 0 }
-            key={ i }
             ref={(element) => refItems.current[i] = element}
             onKeyPress={(e) => { if (e.key === ' ' || e.key === 'Enter') onClick(i); } }>
               <img
