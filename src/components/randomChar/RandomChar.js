@@ -22,21 +22,26 @@ const RandomChar = () => {
   const onCharLoaded = (char) => { setChar(char); }
 
 
-  const { getAllCharacters, getCharacter, clearError, process, setProcess } = useServices();
+  const { total, getEveryOne, getCharacter, clearError, process, setProcess } = useServices();
   const characterData = () => {
-    getAllCharacters()
-      .then((res) => {
-        let resArr = [];
-        res.forEach((result) => resArr.push(result.id));
+    let randomTotal;
+    total().then((result) => {
+      randomTotal = Math.floor(Math.random() * ((result + 1) - 100) + 100);
 
-        const randElemArr = Math.floor(Math.random() * resArr.length),
-              id = resArr[randElemArr];
+      getEveryOne(randomTotal)
+        .then((res) => {
+          let resArr = [];
+          res.forEach((result) => resArr.push(result.id));
 
-        clearError();
-        getCharacter(id)
-          .then(onCharLoaded)
-          .then(() => setProcess('confirmed'));
-      });
+          const randElemArr = Math.floor(Math.random() * resArr.length),
+                id = resArr[randElemArr];
+
+          clearError();
+          getCharacter(id)
+            .then(onCharLoaded)
+            .then(() => setProcess('confirmed'));
+        });
+    });
   };
 
 
