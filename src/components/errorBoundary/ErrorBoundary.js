@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component } from 'react';
 import Error from '../../helpers/error';
 
 class ErrorBoundary extends Component {

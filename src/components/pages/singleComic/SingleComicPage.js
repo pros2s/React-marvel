@@ -31,7 +31,7 @@ const SingleComicPage = () => {
 
 
   return (
-    <div className="single-comic">
+    <div className='single-comic'>
       { content }
     </div>
   );

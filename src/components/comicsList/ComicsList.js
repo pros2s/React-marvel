@@ -51,7 +51,7 @@ const ComicsList = (props) => {
       return (
         <Link to={`/comics/${id}`} key={ i }>
           <li
-            className="comics__item"
+            className='comics__item'
             tabIndex={ 0 }
             ref={(element) => refItems.current[i] = element}
             onKeyPress={(e) => { if (e.key === ' ' || e.key === 'Enter') onClick(i); } }>
@@ -59,9 +59,9 @@ const ComicsList = (props) => {
                 style={ { objectFit } }
                 src={ thumbnail }
                 alt={ title }
-                className="comics__item-img"/>
-              <div className="comics__item-name">{ title }</div>
-              <div className="comics__item-price">{ price }</div>
+                className='comics__item-img'/>
+              <div className='comics__item-name'>{ title }</div>
+              <div className='comics__item-price'>{ price }</div>
           </li>
         </Link>
       );
@@ -73,17 +73,17 @@ const ComicsList = (props) => {
   };
 
   return (
-    <div className="comics__list">
-      <ul className="comics__grid">
+    <div className='comics__list'>
+      <ul className='comics__grid'>
         { prepareToRender() }
       </ul>
 
       <button
-        className="button button__main button__long"
+        className='button button__main button__long'
         style={ { 'display': comicsEnded ? 'none' : 'block' }}
         disabled={ newComicsLoading }
         onClick={ () => onRequest(offset) }>
-          <div className="inner">load more</div>
+          <div className='inner'>load more</div>
       </button>
     </div>
   );

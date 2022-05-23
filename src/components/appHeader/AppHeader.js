@@ -4,13 +4,13 @@ import './appHeader.scss';
 
 const AppHeader = () => {
   return (
-    <header className="app__header">
-      <h1 className="app__title">
+    <header className='app__header'>
+      <h1 className='app__title'>
         <Link to='/'>
           <span>Marvel</span> information portal
         </Link>
       </h1>
-      <nav className="app__menu">
+      <nav className='app__menu'>
         <ul>
           <li>
             <NavLink

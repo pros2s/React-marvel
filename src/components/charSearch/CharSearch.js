@@ -22,12 +22,12 @@ const CharSearch = () => {
   }
 
 
-  const errMessage = error ? <div className="char__search-critical-error"><Error/></div> : null;
+  const errMessage = error ? <div className='char__search-critical-error'><Error/></div> : null;
   const result = !char ? null : <SearchResult char={ char }/>
 
 
   return (
-    <div className="char__search-form">
+    <div className='char__search-form'>
       <Formik
         initialValues={{
           charName: ''
@@ -39,18 +39,18 @@ const CharSearch = () => {
         }
         onSubmit={ ({ charName }) => { charReq(charName) } }>
         <Form>
-          <label htmlFor="charName" className="char__search-label">Or find a character by name:</label>
-          <div className="char__search-wrapper">
+          <label htmlFor='charName' className='char__search-label'>Or find a character by name:</label>
+          <div className='char__search-wrapper'>
             <Field
               id='charName'
-              type="text"
+              type='text'
               name='charName'
-              placeholder="Enter name"/>
+              placeholder='Enter name'/>
             <button
               className='button button__main'
               type='submit'
               disabled={ loading }>
-                <div className="inner">find</div>
+                <div className='inner'>find</div>
             </button>
           </div>
           <ErrorMessage className='char__search-error' component='div' name='charName'/>

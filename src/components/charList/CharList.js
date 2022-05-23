@@ -59,7 +59,7 @@ const CharList = (props) => {
                         'cover';
       return (
         <li
-          className="char__item"
+          className='char__item'
           ref={(element) => refItems.current[i] = element}
           tabIndex={0}
           key={ item.id }
@@ -71,7 +71,7 @@ const CharList = (props) => {
             }
           }>
             <img style={ { objectFit } } src={ item.thumbnail } alt={ item.name }/>
-            <div className="char__name">{ item.name }</div>
+            <div className='char__name'>{ item.name }</div>
         </li>
       );
     });
@@ -82,17 +82,17 @@ const CharList = (props) => {
   };
 
   return (
-    <div className="char__list">
-      <ul className="char__grid">
+    <div className='char__list'>
+      <ul className='char__grid'>
           { prepareToRender() }
       </ul>
 
       <button
-        className="button button__main button__long"
+        className='button button__main button__long'
         style={{ 'display': charsEnded ? 'none' : 'block' }}
         disabled={ newCharsLoading }
         onClick={ () =>   onRequest(offset) }>
-          <div className="inner">load more</div>
+          <div className='inner'>load more</div>
       </button>
     </div>
   );
