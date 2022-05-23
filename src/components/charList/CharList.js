@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 
 import setContentFrstRequest from '../../utils/setContentFrstRequest';
 import useServices from '../../services/services';
@@ -77,10 +77,16 @@ const CharList = (props) => {
     });
   };
 
+  const content = useMemo(() => {
+    return setContentFrstRequest(() => prepareToRender(), process, newCharsLoading);
+    // eslint-disable-next-line
+  }, [process]);
+
+
   return (
     <div className='char__list'>
       <ul className='char__grid'>
-          { setContentFrstRequest(() => prepareToRender(), process, newCharsLoading) }
+          { content }
       </ul>
 
       <button
