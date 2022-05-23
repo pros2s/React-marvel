@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import useServices from '../../services/services';
-import Loading from '../../helpers/loading';
-import Error from '../../helpers/error';
+import setContentFrstRequest from '../../utils/setContentFrstRequest';
 
 import './comicsList.scss';
 
@@ -13,7 +12,7 @@ const ComicsList = (props) => {
   const [ comicsList, setComicsList ] = useState([]);
   const [ offset, setOffset ] = useState(0);
 
-  const { error, loading, getAllComics } = useServices();
+  const { getAllComics, process, setProcess } = useServices();
 
   useEffect(() => {
     onRequest(offset, true);
@@ -23,7 +22,8 @@ const ComicsList = (props) => {
   const onRequest = (offset, initial) => {
     initial ? setNewComicsLoading(false) : setNewComicsLoading(true);
     getAllComics(offset)
-      .then(onComicsLoaded);
+      .then(onComicsLoaded)
+      .then(() => setProcess('confirmed'));
   };
 
   const onComicsLoaded = (newComicsList) => {
@@ -42,7 +42,7 @@ const ComicsList = (props) => {
 
 
   const prepareToRender = () => {
-    const comics = comicsList.map((item, i) => {
+    return comicsList.map((item, i) => {
       const { id, thumbnail, title, price } = item;
 
       const objectFit = thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ?
@@ -66,16 +66,12 @@ const ComicsList = (props) => {
         </Link>
       );
     });
-
-    return loading && !newComicsLoading ?
-                              <Loading/> : error ?
-                                           <Error/> : comics;
   };
 
   return (
     <div className='comics__list'>
       <ul className='comics__grid'>
-        { prepareToRender() }
+        { setContentFrstRequest(() => prepareToRender(), process, newComicsLoading ) }
       </ul>
 
       <button

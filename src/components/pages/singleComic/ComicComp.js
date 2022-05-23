@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-const ComicComp = ({ comic }) => {
-  if (!comic) return 'Here should be some comicses';
-  const { pageCount, title, description, thumbnail, language, price, url } = comic
+const ComicComp = ({ data }) => {
+  if (!data) return 'Here should be some comicses';
+  const { pageCount, title, description, thumbnail, language, price, url } = data
 
   return (
     <>

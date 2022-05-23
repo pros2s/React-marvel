@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
+import setContent from '../../utils/setContent';
 import useServices from '../../services/services';
 import CharComp from './charComp';
-import Error from '../../helpers/error';
-import Loading from '../../helpers/loading';
-import Skeleton from '../skeleton/Skeleton';
 
 import './charInfo.scss';
 
@@ -25,7 +23,7 @@ const CharInfo = (props) => {
     setChar(char);
   };
 
-  const { error, loading, getCharacter, clearError } = useServices();
+  const { getCharacter, clearError, process, setProcess } = useServices();
 
   const characterData = () => {
     if (!charId) return;
@@ -34,13 +32,8 @@ const CharInfo = (props) => {
     clearError();
     getCharacter(charId)
       .then(onCharLoaded)
+      .then(() => setProcess('confirmed'));
   };
-
-
-  const content = loading ?
-                  <Loading/> : error ?
-                               <Error/> : char ?
-                                          <CharComp char={ char } showTrigger={ showTrigger }/> : <Skeleton/>;
 
   return (
     <CSSTransition
@@ -48,7 +41,7 @@ const CharInfo = (props) => {
       timeout={ 1000 }
       classNames='char__animate'>
         <div className='char__info'>
-          { content }
+          { setContent(CharComp, process, char) }
         </div>
     </CSSTransition>
   );

@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 
 import useServices from '../../services/services';
 import CharBlock from './charBlock';
-import Error from '../../helpers/error';
-import Loading from '../../helpers/loading';
+import setContent from '../../utils/setContent';
 
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
@@ -23,7 +22,7 @@ const RandomChar = () => {
   const onCharLoaded = (char) => { setChar(char); }
 
 
-  const { loading, error, getAllCharacters, getCharacter, clearError } = useServices();
+  const { getAllCharacters, getCharacter, clearError, process, setProcess } = useServices();
   const characterData = () => {
     getAllCharacters()
       .then((res) => {
@@ -35,19 +34,15 @@ const RandomChar = () => {
 
         clearError();
         getCharacter(id)
-          .then(onCharLoaded);
+          .then(onCharLoaded)
+          .then(() => setProcess('confirmed'));
       });
   };
 
 
-  const content = loading ?
-                  <Loading/> : error ?
-                              <Error/> :
-                              <CharBlock char={ char }/>;
-
   return (
     <div className='randomchar'>
-      { content }
+      { setContent(CharBlock, process, char) }
 
       <div className='randomchar__static'>
         <p className='randomchar__title'>

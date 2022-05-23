@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
 
-const CharComp = ({ char }) => {
-  const { name, description, thumbnail, homepage, wiki } = char;
+const CharComp = ({ data }) => {
+  const { name, description, thumbnail, homepage, wiki } = data;
 
   return (
     <div className='single-comic'>

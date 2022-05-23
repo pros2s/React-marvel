@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
+import setContentFrstRequest from '../../utils/setContentFrstRequest';
 import useServices from '../../services/services';
-import Loading from '../../helpers/loading';
-import Error from '../../helpers/error';
 
 import './charList.scss';
 
@@ -13,7 +12,7 @@ const CharList = (props) => {
   const [ charlist, setCharList ] = useState([]);
   const [ offset, setOffset ] = useState(210);
 
-  const { error, loading, getAllCharacters} = useServices();
+  const { getAllCharacters, process, setProcess } = useServices();
 
   useEffect(() => {
     onRequest(offset, true);
@@ -23,7 +22,8 @@ const CharList = (props) => {
   const onRequest = (offset, initial) => {
     initial ? setNewCharsLoading(false) : setNewCharsLoading(true);
     getAllCharacters(offset)
-      .then(onCharsLoaded);
+      .then(onCharsLoaded)
+      .then(() => setProcess('confirmed'));
   };
 
   const onCharsLoaded = (newCharlist) => {
@@ -53,7 +53,7 @@ const CharList = (props) => {
 
 
   const prepareToRender = () => {
-    const characters = charlist.map((item, i) => {
+    return charlist.map((item, i) => {
       const objectFit = item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ?
                         'contain' :
                         'cover';
@@ -75,16 +75,12 @@ const CharList = (props) => {
         </li>
       );
     });
-
-    return loading && !newCharsLoading ?
-                            <Loading/> : error ?
-                                        <Error/> : characters;
   };
 
   return (
     <div className='char__list'>
       <ul className='char__grid'>
-          { prepareToRender() }
+          { setContentFrstRequest(() => prepareToRender(), process, newCharsLoading) }
       </ul>
 
       <button

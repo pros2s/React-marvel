@@ -1,5 +1,5 @@
-const CharBlock = ({ char }) => {
-  const { name, description, thumbnail, homepage, wiki } = char;
+const CharBlock = ({ data }) => {
+  const { name, description, thumbnail, homepage, wiki } = data;
 
   const noDescMessage = 'Here should be description of personage';
   const objectFit = thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ?
