@@ -7,8 +7,19 @@
 .comics__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 225px);
-  justify-content: space-between;
+  justify-content: space-around;
   row-gap: 55px;
+  text-align: center;
+
+  a:nth-child(even) {
+    margin: 0 15px;
+  }
+
+  a {
+    @media screen and (max-width: 713px) {
+      margin: 0 25px;
+    }
+  }
 }
 
 .comics__item {

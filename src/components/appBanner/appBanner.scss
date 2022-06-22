@@ -3,17 +3,30 @@
 .app__banner {
   width: 100%;
   background-color: $dark;
-  height: 100px;
+  height: auto;
   padding: 0 25px 0 45px;
   display: grid;
-  grid-template-columns: 152px auto 133px;
+  grid-template-columns: auto auto auto;
 
   &-text {
     font-weight: bold;
     font-size: 24px;
     line-height: 32px;
     color: #FFFFFF;
-    padding-left: 83px;
     padding-top: 18px;
+  }
+
+  img {
+    @media screen and (max-width: 445px) {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 515px) {
+    padding: 0;
+  }
+
+  @media screen and (max-width: 445px) {
+    padding: 0 20px 15px 35px;
   }
 }
