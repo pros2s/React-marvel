@@ -1,21 +1,39 @@
 @import '../../../style/variables.scss';
 
+
 .single-comic {
   margin-top: 50px;
   display: grid;
-  grid-template-columns: 293px 550px auto;
+  grid-template-columns: auto auto auto;
   column-gap: 50px;
   align-items: start;
 }
 
 .single-comic__img {
-  width: 293px;
-  height: 450px;
+  max-width: 90%;
+
+  @media screen and (max-width: 775px) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  @media screen and (max-width: 620px) {
+    max-width: 70%;
+    margin: 0 auto 20px;
+
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
 }
 
 .single-comic__info {
   position: relative;
   height: 100%;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    margin: 15px 0px 0 32px;
+  }
 }
 
 .single-comic__name {
@@ -28,6 +46,10 @@
   font-size: 18px;
   line-height: 24px;
   margin-top: 25px;
+
+  @media screen and (max-width: 860px) {
+    margin-top: 15px;
+  }
 }
 
 .single-comic__price {
@@ -36,6 +58,10 @@
   line-height: 32px;
   color: $main-color;
   margin-top: 25px;
+
+  @media screen and (max-width: 860px) {
+    margin-top: 15px;
+  }
 }
 
 .single-comic__back {
@@ -47,6 +73,10 @@
   &:hover {
       color: $main-color;
   }
+
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 }
 
 .single-comic__descLink {
@@ -54,6 +84,16 @@
   font-weight: 700;
   position: absolute;
   bottom: 0;
+
+  @media screen and (max-width: 860px) {
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 620px) {
+    position: relative;
+    margin-top: 40px;
+  }
 }
 
 .single-comic__link {

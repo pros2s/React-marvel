@@ -47,17 +47,6 @@ input::-webkit-inner-spin-button {
   padding: 50px 10px;
 
   position: relative;
-
-  .bg-decoration {
-    position: absolute;
-    right: -174px;
-    bottom: -70px;
-    z-index: -1;
-
-    @media screen and (max-width: 1000px) {
-      display: none;
-    }
-  }
 }
 
 main {
