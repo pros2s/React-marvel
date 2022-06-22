@@ -9,6 +9,15 @@
   font-weight: bold;
   font-size: 28px;
   line-height: 37px;
+
+  .app__title-information {
+    color: $dark;
+
+    @media screen and (max-width: 690px) {
+      display: none;
+    }
+  }
+
   span {
     color: $main-color;
   }

@@ -42,9 +42,10 @@ input::-webkit-inner-spin-button {
 }
 
 .app {
-  width: 1100px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 50px 0 50px 0;
+  padding: 50px 10px;
+
   position: relative;
 
   .bg-decoration {
@@ -52,6 +53,10 @@ input::-webkit-inner-spin-button {
     right: -174px;
     bottom: -70px;
     z-index: -1;
+
+    @media screen and (max-width: 1000px) {
+      display: none;
+    }
   }
 }
 

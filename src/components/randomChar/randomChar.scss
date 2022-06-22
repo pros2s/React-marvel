@@ -3,14 +3,33 @@
 .randomchar {
   display: grid;
   grid-template-columns: repeat(2, 50%);
+
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: repeat(1, 100%);
+
+    max-width: 700px;
+    margin: 0 auto;
+  }
 }
 
 .randomchar__block {
   padding: 40px 35px;
+
+  height: 240px;
+
   display: grid;
   grid-template-columns: 180px auto;
   column-gap: 30px;
+
+  @media screen and (max-width: 1200px) {
+    padding: 30px 15px;
+  }
+
+  @media screen and (max-width: 500px) {
+    height: 280px;
+  }
 }
 
 .randomchar__img {
@@ -24,6 +43,10 @@
   grid-template-rows: minmax(29px, auto) 90px 38px;
   row-gap: 10px;
   padding-top: 3px;
+
+  @media screen and (max-width: 510px) {
+  grid-template-rows: minmax(29px, auto) auto auto;
+  }
 }
 
 .randomchar__name {
@@ -47,6 +70,12 @@
   a:nth-child(1) {
     margin-right: 30px;
   }
+
+  a {
+    @media screen and (max-width: 510px) {
+      margin-top: 5px;
+    }
+  }
 }
 
 .randomchar__static {
@@ -56,6 +85,10 @@
 
   button {
     margin-top: 13px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    padding: 30px 15px;
   }
 }
 
@@ -75,4 +108,8 @@
   position: absolute;
   bottom: 14px;
   right: -37px;
+
+  @media screen and (max-width: 500px) {
+    width: 150px;
+  }
 }
