@@ -7,8 +7,6 @@ import CharInfo from '../charInfo/CharInfo';
 import CharSearch from '../charSearch/CharSearch';
 import ErrorBoundary from '../errorBoundary/ErrorBoundary';
 
-import decoration from '../../resources/img/vision.png';
-
 const MainPage = () => {
   const [ selectedChar, setChar ] = useState(null);
   const onCharSelected = (id) => setChar(id);
